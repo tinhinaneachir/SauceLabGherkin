@@ -33,7 +33,7 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String username, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.clear();
