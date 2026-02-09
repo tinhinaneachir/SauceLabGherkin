@@ -12,14 +12,14 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginSteps {
 
-    WebDriver driver = DriverFactory.getDriver();
-    LoginPage loginPage = new LoginPage(driver);
-    ConfigReader settings = new ConfigReader();
+    private WebDriver driver;
+    private LoginPage loginPage;
+    private ConfigReader settings = new ConfigReader();
 
     @Before
     public void setUp() {
-        driver = DriverFactory.getDriver();
-        loginPage = new LoginPage(driver);
+        driver = DriverFactory.getDriver();   // Assure que le driver est prêt
+        loginPage = new LoginPage(driver);    // Initialise la page ici
     }
 
     @Given("l'utilisateur est sur la page de connexion")
@@ -30,12 +30,6 @@ public class LoginSteps {
     @When("il saisit le login {string} et le mot de passe {string}")
     public void login(String user, String pass) {
         loginPage.login(user, pass);
-    }
-
-    @Then("la connexion est échouée et un message s'affiche")
-    public void verifierLoginErreur() {
-        Assert.assertTrue(loginPage.isErrorMessageDisplayed());
-        Assert.assertTrue(loginPage.getErrorMessage().contains("Epic sadface"));
     }
 
     @Then("le statut de la connexion devrait être {string}")
@@ -50,5 +44,4 @@ public class LoginSteps {
                     loginPage.getErrorMessage().contains("Epic sadface"));
         }
     }
-
 }
