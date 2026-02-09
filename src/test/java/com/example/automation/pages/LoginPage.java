@@ -1,5 +1,6 @@
 package com.example.automation.pages;
 import io.cucumber.java.de.Wenn;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,5 +48,9 @@ public class LoginPage extends BasePage{
 
     public boolean afficheErreur() {
         return errorMessage.isDisplayed();
+    }
+
+    public boolean isErrorMessageDisplayed() {
+        return !driver.findElements((By) errorMessage).isEmpty();
     }
 }
