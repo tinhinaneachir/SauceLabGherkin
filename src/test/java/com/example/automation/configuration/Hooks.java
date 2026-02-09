@@ -49,6 +49,9 @@ public class Hooks {
         DriverFactory.quitDriver();
     }
 
+    /*
+
+
     @AfterClass
     public static void remonterXray() throws Exception {
         importTokenXray.remonterXray();
@@ -56,4 +59,6 @@ public class Hooks {
         System.out.println("Le test passe par la!!!");
 
     }
+    */
+
 }
