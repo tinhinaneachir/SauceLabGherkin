@@ -1,0 +1,9 @@
+com\example\automation\pages\ProductPage.class
+com\example\automation\pages\BasePage.class
+com\example\automation\runners\TestRunner.class
+com\example\automation\configuration\ConfigReader.class
+com\example\automation\pages\CartPage.class
+com\example\automation\steps\ImportTokenXray.class
+com\example\automation\configuration\Hooks.class
+com\example\automation\configuration\DriverFactory.class
+com\example\automation\pages\LoginPage.class

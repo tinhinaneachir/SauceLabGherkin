@@ -1,0 +1,14 @@
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\configuration\ConfigReader.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\configuration\DriverFactory.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\configuration\Hooks.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\pages\BasePage.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\pages\CartPage.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\pages\LoginPage.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\pages\ProductPage.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\runners\TestRunner.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\steps\DowloadFeature.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\steps\HomeSteps.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\steps\ImportTokenXray.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\steps\LoginSteps.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\steps\ProductSteps.java
+C:\dev\SauceLabsGherkin\src\test\java\com\example\automation\utils\Basetools.java
