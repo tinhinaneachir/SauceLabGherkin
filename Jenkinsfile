@@ -41,6 +41,15 @@ pipeline {
             }
         }
 
+        stage('Export features') {
+                    steps {
+                        echo 'Exportation des features depuis Xray...'
+                        bat 'curl -H "Content-Type: application/json" -X GET -H "Authorization: Bearer %TOKEN%"  "https://xray.cloud.getxray.app/api/v1/export/cucumber?keys=POEI2-713" --output features.zip'
+                        bat 'tar -xf features.zip -C src\test\resources\features'
+                        bat 'del features.zip'
+                    }
+                }
+
 
         stage('Publish Results to Xray') {
             steps {
@@ -61,7 +70,6 @@ pipeline {
                      --data-binary @target\\cucumber.json ^
                      -F testPlanKey=POEI2-710
                 """
-
             }
         }
     }

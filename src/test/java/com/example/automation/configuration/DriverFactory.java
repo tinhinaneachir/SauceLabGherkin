@@ -1,7 +1,9 @@
 package com.example.automation.configuration;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -26,12 +28,16 @@ public class DriverFactory {
                         chromeOptions.addArguments("--incognito");
                         chromeOptions.addArguments("--start-maximized");
                         chromeOptions.addArguments("--remote-allow-origins=*");
+                        driver = new ChromeDriver(chromeOptions);
 
+                        /*
                         // URL du Selenium Grid
                         driver = new RemoteWebDriver(
                                 new URL("http://admin:admin@172.16.14.237:4444/wd/hub"),
                                 chromeOptions
                         );
+
+                         */
                         break;
 
                     case "FIREFOX":
