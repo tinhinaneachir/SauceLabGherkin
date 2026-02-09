@@ -25,6 +25,14 @@ pipeline {
             }
         }
 
+        stage('Check JSON') {
+            steps {
+                echo "Liste du dossier target :"
+                bat 'dir target'
+            }
+        }
+
+
         stage('Publish Results to Xray') {
             steps {
                 echo 'Publication des résultats vers Xray...'
