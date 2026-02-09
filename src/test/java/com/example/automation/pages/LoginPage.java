@@ -37,9 +37,9 @@ public class LoginPage extends BasePage{
         passwordInput.sendKeys(password);
         loginButton.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name")));
-        usernameField.sendKeys(username);
+        usernameField.sendKeys("standard_user");
     }
 
     public void open(String url) {

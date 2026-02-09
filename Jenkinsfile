@@ -25,7 +25,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                bat "mvn test -Dtags=@POEI2-717"
+                bat mvn test -Dtags=@POEI2-717 -Dbrowser=%SELENIUM_BROWSER%
                 echo 'Execution des tests Cucumber via Maven...'
                 bat 'chcp 65001'
                 bat 'mvn test -Dtags=@POEI2-717'
