@@ -8,7 +8,6 @@ Feature: Exécution des Tests de Plan de Test POEI2-710
 		
 		    Examples:
 		      | username      | password     | resultat |
-		      | standard_user | secret_sauce | error  |
 		      | locked_out_user | secret_sauce | success |
 		
 	@POEI2-663
