@@ -27,8 +27,14 @@ public class LoginSteps {
     public void login(String user, String pass) {
         driver = DriverFactory.getDriver();
         loginPage = new LoginPage(driver);
+
+        if (!driver.getCurrentUrl().contains("saucedemo")) {
+            loginPage.open(settings.getProperty("url"));
+        }
+
         loginPage.login(user, pass);
     }
+
 
     @Then("la connexion est échouée et un message d'erreur s'affiche")
     public void checkError() {
