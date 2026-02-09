@@ -3,6 +3,7 @@ package com.example.automation.steps;
 import com.example.automation.configuration.ConfigReader;
 import com.example.automation.configuration.DriverFactory;
 import com.example.automation.pages.LoginPage;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,6 +15,12 @@ public class LoginSteps {
     WebDriver driver = DriverFactory.getDriver();
     LoginPage loginPage = new LoginPage(driver);
     ConfigReader settings = new ConfigReader();
+
+    @Before
+    public void setUp() {
+        driver = DriverFactory.getDriver();
+        loginPage = new LoginPage(driver);
+    }
 
     @Given("l'utilisateur est sur la page de connexion")
     public void openLogin() {
@@ -34,9 +41,14 @@ public class LoginSteps {
     @Then("le statut de la connexion devrait être {string}")
     public void etatConnexion(String etat) {
         if (etat.equalsIgnoreCase("success")) {
-            Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+            Assert.assertTrue("L'utilisateur n'a pas été redirigé vers la page d'inventaire",
+                    driver.getCurrentUrl().contains("inventory"));
         } else {
-            Assert.assertTrue(loginPage.isErrorMessageDisplayed());
+            Assert.assertTrue("Le message d'erreur n'est pas affiché",
+                    loginPage.isErrorMessageDisplayed());
+            Assert.assertTrue("Le message d'erreur est incorrect",
+                    loginPage.getErrorMessage().contains("Epic sadface"));
         }
     }
+
 }
