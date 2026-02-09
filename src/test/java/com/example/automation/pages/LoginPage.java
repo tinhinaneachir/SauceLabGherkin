@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage{
 
@@ -13,6 +17,8 @@ public class LoginPage extends BasePage{
     WebElement passwordInput;
     @FindBy(id = "login-button")
     WebElement loginButton;
+
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -31,8 +37,9 @@ public class LoginPage extends BasePage{
         passwordInput.sendKeys(password);
         loginButton.click();
 
-        // renseigne les champs
-        // appuye sur le bouton connexion
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name")));
+        usernameField.sendKeys(username);
     }
 
     public void open(String url) {
