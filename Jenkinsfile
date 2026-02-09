@@ -17,8 +17,8 @@ pipeline {
         stage('Build & Test') {
             steps {
                 echo 'Execution des tests Cucumber via Maven...'
-      
-                    bat 'mvn clean test'
+                    bat 'chcp 65001'
+                    bat 'mvn test -Dtags=@POEI2-717'
             }
         }
     }
