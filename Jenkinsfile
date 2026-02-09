@@ -29,6 +29,7 @@ pipeline {
                 echo 'Execution des tests Cucumber via Maven...'
                 bat 'chcp 65001'
                 bat 'mvn test -Dtags=@POEI2-717'
+                }
 
             }
         }
