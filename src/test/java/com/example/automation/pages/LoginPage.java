@@ -35,7 +35,7 @@ public class LoginPage extends BasePage {
     public void login(String username, String password) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(usernameInput));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
         usernameInput.clear();
         usernameInput.sendKeys(username);
 
@@ -44,6 +44,9 @@ public class LoginPage extends BasePage {
 
         loginButton.click();
     }
+
+
+
 
     public boolean isErrorMessageDisplayed() {
         return !driver.findElements(errorMessage).isEmpty();
