@@ -9,7 +9,7 @@ pipeline {
         cron('30 11 * * 1')
     }
 
-    parametres {
+    parameters {
     string(name: 'SELENIUM_BROWSER', defaultValue: 'CHROME')
 
     }
