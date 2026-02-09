@@ -44,7 +44,6 @@ pipeline {
                  -d "{\\"client_id\\": \\"19B21B3A87A84FB187E8ED0C929260EA\\", \\"client_secret\\": \\"8f8d1ba97004498878ddc1f48835d9a997dea57056fe756891ffbd7e1ac68177\\"}" > token.txt
             '''
 
-
                 // Envoi du fichier JSON
                 bat '''
                 curl -H "Content-Type: application/json" ^

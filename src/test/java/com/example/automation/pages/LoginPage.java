@@ -35,7 +35,7 @@ public class LoginPage extends BasePage {
     public void login(String username, String password) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
+        wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.clear();
         usernameInput.sendKeys(username);
 

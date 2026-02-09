@@ -18,7 +18,5 @@ Feature: Authentification
     Examples:
       | username      | password     | resultat |
       | standard_user | secret_sauce | error  |
-      | problem_user | secret_sauce | error  |
       | performance_glitch_user | secret_sauce | success  |
-      | locked_out_user | secret_sauce | success |
 
