@@ -20,27 +20,16 @@ public class Hooks {
         driver = DriverFactory.getDriver();
     }
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
     @After
     public void tearDown(Scenario scenario) throws Exception {
-
         if (scenario.isFailed() && driver != null) {
             TakesScreenshot ts = (TakesScreenshot) driver;
-
             File source = ts.getScreenshotAs(OutputType.FILE);
             File destination = new File("target/screenshots/" + scenario.getName() + ".png");
             FileUtils.copyFile(source, destination);
 
-            scenario.attach(
-                    ts.getScreenshotAs(OutputType.BYTES),
-                    "image/png",
-                    "Failure Screenshot"
-            );
+            scenario.attach(ts.getScreenshotAs(OutputType.BYTES), "image/png", "Failure Screenshot");
         }
-
         DriverFactory.quitDriver();
     }
 

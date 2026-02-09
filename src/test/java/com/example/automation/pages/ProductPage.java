@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class ProductPage extends BasePage {
 
-
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -15,5 +14,4 @@ public class ProductPage extends BasePage {
                 By.xpath("//div[text()='" + productName + "']/ancestor::div[@class='inventory_item']//button")
         ).click();
     }
-
 }

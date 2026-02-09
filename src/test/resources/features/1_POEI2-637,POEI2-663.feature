@@ -3,8 +3,10 @@ Feature: Exécution des Tests de Plan de Test POEI2-710
 
 	@POEI2-637
 	Scenario Outline: Connexion avec plusieurs utilisateurs
-		When il saisit le login "<username>" et le mot de passe "<password>"
-		    Then le résultat de la connexion est "<resultat>"
+		Given l'utilisateur est sur la page de connexion
+		When il saisit le login "<user>" et le mot de passe "<password>"
+		Then le résultat de la connexion est "<resultat>"
+
 		
 		    Examples:
 		      | username      | password     | resultat |

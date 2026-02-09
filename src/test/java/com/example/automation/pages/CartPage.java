@@ -1,21 +1,23 @@
 package com.example.automation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class CartPage extends BasePage {
 
+    private final By cartBadge = By.className("shopping_cart_badge");
+
     public CartPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
-    @FindBy(className = "shopping_cart_badge")
-    WebElement cartBadge;
 
+    // Retourne le nombre d'articles dans le panier
     public int getCartItemsCount() {
-        return Integer.parseInt(cartBadge.getText());
+        try {
+            String count = driver.findElement(cartBadge).getText();
+            return Integer.parseInt(count);
+        } catch (Exception e) {
+            return 0; // aucun article
+        }
     }
-
 }
