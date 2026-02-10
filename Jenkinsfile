@@ -24,7 +24,6 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 bat "mvn test -Dtags=@POEI2-717"
                 echo 'Execution des tests Cucumber via Maven...'
                 bat 'chcp 65001'
