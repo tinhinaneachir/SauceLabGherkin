@@ -1,5 +1,6 @@
 package com.example.automation.runners;
 
+import com.example.automation.configuration.Hooks;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -17,5 +18,5 @@ import org.junit.runner.RunWith;
         tags = "@POEI2-717"
 
 )
-public class TestRunner {
+public class RunnerTest extends Hooks {
 }

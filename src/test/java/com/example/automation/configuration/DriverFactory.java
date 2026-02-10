@@ -3,6 +3,8 @@ package com.example.automation.configuration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -14,19 +16,35 @@ public class DriverFactory {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            // Ensuite, passe ces options à ton WebDriver
-            ChromeOptions options = new ChromeOptions();
-            Map<String, Object> prefs = new HashMap<>();
-            prefs.put("profile.default_content_setting_values.notifications", 2);
-            prefs.put("credentials_enable_service", false);
-            prefs.put("profile.password_manager_enabled", false);
-            prefs.put("profile.default_content_settings.popups", 0);
-            options.addArguments("--incognito");
-            options.setExperimentalOption("prefs", prefs);
-            driver = new ChromeDriver(options);
+            // Récupère le navigateur depuis le paramètre Jenkins ou prend Chrome par défaut
+            String browser = System.getProperty("browser", "CHROME").toUpperCase();
+
+            switch (browser) {
+                case "CHROME":
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    Map<String, Object> prefs = new HashMap<>();
+                    prefs.put("profile.default_content_setting_values.notifications", 2);
+                    prefs.put("credentials_enable_service", false);
+                    prefs.put("profile.password_manager_enabled", false);
+                    prefs.put("profile.default_content_settings.popups", 0);
+                    chromeOptions.addArguments("--incognito");
+                    chromeOptions.setExperimentalOption("prefs", prefs);
+                    driver = new ChromeDriver(chromeOptions);
+                    break;
+
+                case "FIREFOX":
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    firefoxOptions.addArguments("-private");
+                    driver = new FirefoxDriver(firefoxOptions);
+                    break;
+
+                default:
+                    throw new RuntimeException("Navigateur non supporté: " + browser);
+            }
+
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            //driver.manage().window().maximize();
         }
+
         return driver;
     }
 
