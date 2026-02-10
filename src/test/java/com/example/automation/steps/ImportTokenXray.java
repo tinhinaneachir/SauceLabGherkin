@@ -83,7 +83,7 @@ public class ImportTokenXray {
         HttpURLConnection conn;
         URL url;
         String result;
-        String  URL ="https://xray.cloud.getxray.app/api/v1/import/execution/cucumber";
+        String  URL ="https://xray.cloud.getxray.app/api/v2/import/execution/cucumber";
         //Call the openConnection method on the URL to create a connection object
         url = new URL(URL);
         conn = (HttpURLConnection) url.openConnection();
