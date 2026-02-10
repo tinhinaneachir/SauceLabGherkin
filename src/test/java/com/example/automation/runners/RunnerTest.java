@@ -18,5 +18,5 @@ import org.junit.runner.RunWith;
         tags = "@POEI2-717"
 
 )
-public class RunnerTest extends Hooks {
+public class RunnerTest {
 }

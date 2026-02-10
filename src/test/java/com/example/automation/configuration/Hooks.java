@@ -33,9 +33,9 @@ public class Hooks {
         DriverFactory.quitDriver();
     }
 
-    @AfterAll
+   /* @AfterAll
     public static void publishToXray() throws Exception {
         importTokenXray.remonterXray();
         System.out.println("Résultats envoyés vers Xray ✔");
-    }
+    }*/
 }
