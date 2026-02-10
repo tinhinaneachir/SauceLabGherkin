@@ -24,7 +24,6 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 bat "mvn test -Dtags=@POEI2-717"
                 echo 'Execution des tests Cucumber via Maven...'
                 bat 'chcp 65001'
@@ -41,6 +40,36 @@ pipeline {
             }
         }
 
+         stage('Export Features from Xray') {
+             steps {
+                 bat '''
+                       @echo off
+                       set /p TOKEN=<token.txt
+                       echo Export features from Xray...
+
+                       REM Utilisation de l'endpoint d'export standard (GET est souvent plus fiable pour les keys)
+                       curl -H "Authorization: Bearer %TOKEN%" ^
+                            "https://xray.cloud.getxray.app/api/v2/export/cucumber?keys=POEI2-717" ^
+                            -o exported_features.zip
+
+                       for %%F in (exported_features.zip) do if %%~zF LSS 500 (
+                           echo Erreur : Le fichier ZIP est invalide ou contient une erreur JSON.
+                           type exported_features.zip
+                           exit /b 1
+                       )
+                       '''
+
+                               powershell '''
+                               $zip = "exported_features.zip"
+                               $dest = "exported_features"
+                               if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
+                               Expand-Archive -Path $zip -DestinationPath $dest -Force
+                               $target = "src/test/resources/features"
+                               if (!(Test-Path $target)) { New-Item -ItemType Directory -Path $target | Out-Null }
+                               Copy-Item "$dest\*.feature" -Destination $target -Recurse -Force
+                               '''
+                           }
+
 
         stage('Publish Results to Xray') {
             steps {
@@ -54,13 +83,13 @@ pipeline {
             '''
 
                 // Envoi du fichier JSON
-                bat '''
+         bat """
                 curl -H "Content-Type: application/json" ^
-                -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiJiNmNhZGQwNS1lMzQxLTNmMTctYjU1Zi00OTM0MTI4MWQ4MmEiLCJhY2NvdW50SWQiOiI2MzVhNDAwNWM5N2Y1NDczYWY3MDcwYWYiLCJpc1hlYSI6ZmFsc2UsImlhdCI6MTc3MDYzODU0NywiZXhwIjoxNzcwNzI0OTQ3LCJhdWQiOiIxOUIyMUIzQTg3QTg0RkIxODdFOEVEMEM5MjkyNjBFQSIsImlzcyI6ImNvbS54cGFuZGl0LnBsdWdpbnMueHJheSIsInN1YiI6IjE5QjIxQjNBODdBODRGQjE4N0U4RUQwQzkyOTI2MEVBIn0.1wmr0pKsQ1NWQDVrUrB38pSfj_UN7bARB2Hj1C5v0mc" ^
-                -X POST https://xray.cloud.getxray.app/api/v2/import/execution/cucumber ^
-                --data-binary @target\\cucumber.json
-                '''
-
+                     -H "Authorization: Bearer %XRAY_TOKEN%" ^
+                     -X POST https://xray.cloud.getxray.app/api/v2/import/execution/cucumber ^
+                     --data-binary @target\\cucumber.json ^
+                     -F testPlanKey=POEI2-710
+                """
             }
         }
     }

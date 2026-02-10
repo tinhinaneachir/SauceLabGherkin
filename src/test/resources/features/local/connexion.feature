@@ -7,10 +7,6 @@ Feature: Authentification
     When il saisit le login "standard_user" et le mot de passe "secret_sauce"
     Then il est redirigé vers la page d'accueil
 
-  Scenario: Connexion avec des identifiants invalides à l'application de sauceDemo
-    When il saisit le login "locked_out_user" et le mot de passe "secret_sauce"
-    Then la connexion est échouée et un message d'erreur s'affiche
-
   Scenario Outline: Connexion avec plusieurs utilisateurs
     When il saisit le login "<username>" et le mot de passe "<password>"
     Then le résultat de la connexion est "<resultat>"
