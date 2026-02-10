@@ -2,6 +2,7 @@ package com.example.automation.steps;
 
 import com.example.automation.configuration.ConfigReader;
 import com.example.automation.configuration.DriverFactory;
+import com.example.automation.configuration.Hooks;
 import com.example.automation.pages.LoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,47 +13,28 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginSteps {
 
-    WebDriver driver;
+    WebDriver driver = Hooks.getDriver();
     LoginPage loginPage;
     ConfigReader settings = new ConfigReader();
 
     @Given("l'utilisateur est sur la page de connexion")
     public void openLogin() {
-        driver = DriverFactory.getDriver();
         loginPage = new LoginPage(driver);
         loginPage.open(settings.getProperty("url"));
     }
 
     @When("il saisit le login {string} et le mot de passe {string}")
     public void login(String user, String pass) {
-        driver = DriverFactory.getDriver();
-        loginPage = new LoginPage(driver);
         loginPage.login(user, pass);
-    }
-
-    @Then("la connexion est échouée et un message d'erreur s'affiche")
-    public void checkError() {
-        Assert.assertTrue(loginPage.isErrorMessageDisplayed());
     }
 
     @Then("le résultat de la connexion est {string}")
     public void le_résultat_de_la_connexion_est(String resultat) {
-        driver = DriverFactory.getDriver();
         if (resultat.equalsIgnoreCase("success")) {
             Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
-        } else if (resultat.equalsIgnoreCase("error")) {
-            Assert.assertTrue(driver.findElement(By.cssSelector("h3[data-test='error']")).isDisplayed());
         } else {
-            throw new IllegalArgumentException("Résultat inconnu : " + resultat);
+            Assert.assertTrue(loginPage.isErrorMessageDisplayed());
         }
     }
-
-    @Given("l'utilisateur est connecté à l'application SauceDemo")
-    public void l_utilisateur_est_connecté_à_l_application_sauce_demo() {
-        driver = DriverFactory.getDriver();
-        loginPage = new LoginPage(driver);
-        loginPage.open(settings.getProperty("url"));
-        loginPage.login("standard_user", "secret_sauce");
-    }
-
 }
+
