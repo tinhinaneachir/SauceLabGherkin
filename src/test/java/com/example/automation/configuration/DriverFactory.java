@@ -25,6 +25,7 @@ public class DriverFactory {
                 switch (browser) {
                     case "CHROME":
                         ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.addArguments("--headless=new");
                         chromeOptions.addArguments("--incognito");
                         chromeOptions.addArguments("--start-maximized");
                         chromeOptions.addArguments("--remote-allow-origins=*");
